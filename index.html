@@ -10,35 +10,21 @@ George Kornilov
 
 <br><br>
 
-<video class="work-video" width="500" poster="posters/test.jpg">
-  <source src="videos/test.mp4" type="video/mp4">
-</video>
+<iframe
+  width="500"
+  height="281"
+  src="https://www.youtube-nocookie.com/embed/KEeOZ0tF25A?rel=0&modestbranding=1"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
 
-<p>test work<br>client</p>
+<p></p>
 
-<br><br>
+<br>
 
 buzhba / contact
-
-<script>
-  document.querySelectorAll('.work-video').forEach(video => {
-    video.addEventListener('click', () => {
-
-      // стопаем все остальные
-      document.querySelectorAll('.work-video').forEach(v => {
-        if (v !== video) v.pause();
-      });
-
-      // play/pause
-      if (video.paused) {
-        video.play();
-      } else {
-        video.pause();
-      }
-
-    });
-  });
-</script>
 
 </body>
 </html>
