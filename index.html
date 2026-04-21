@@ -916,13 +916,19 @@
 </div>
 
 <script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
 window.addEventListener('load', function() {
   var hash = location.hash.replace('#', '');
   if (hash && document.getElementById(hash)) {
     show(hash);
+    history.replaceState(null, '', location.pathname + location.search);
+    window.scrollTo(0, 0);
     setTimeout(function() {
       window.scrollTo(0, 0);
     }, 0);
+  } else {
+    window.scrollTo(0, 0);
   }
 });
 
