@@ -14,6 +14,12 @@
 <link rel="dns-prefetch" href="https://www.youtube.com">
 <link rel="dns-prefetch" href="https://i.ytimg.com">
 <link rel="dns-prefetch" href="https://player.vimeo.com">
+<script>
+  window.__initialSection = location.hash ? location.hash.slice(1) : '';
+  if (window.__initialSection) {
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+</script>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="George Kornilov">
 <meta property="og:locale" content="en_US">
@@ -919,16 +925,23 @@
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 window.addEventListener('load', function() {
-  var hash = location.hash.replace('#', '');
+  var hash = window.__initialSection || location.hash.replace('#', '');
   if (hash && document.getElementById(hash)) {
     show(hash);
-    history.replaceState(null, '', location.pathname + location.search);
-    window.scrollTo(0, 0);
+    requestAnimationFrame(function() {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    });
     setTimeout(function() {
       window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }, 0);
   } else {
     window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }
 });
 
