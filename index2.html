@@ -1,7 +1,7 @@
 <html>
 <head><meta charset="UTF-8"><title>George Kornilov</title></head>
 
-<a href="#" onclick="location.reload();return false;" style="color:inherit; text-decoration:none">george kornilov</a><br /><br />
+<a href="#" onclick="show('featured');return false;" style="color:inherit; text-decoration:none">george kornilov</a><span id="header-suffix"></span><br /><br />
 
 <a href="#" onclick="show('buzhba');return false;">buzhba</a><br />
 <a href="#" onclick="show('writer');return false;">writer</a><br />
@@ -706,9 +706,16 @@
 </div>
 
 <script>
+var suffixes = {
+  'writer': ' is a writer',
+  'composer': ' is a composer',
+  'featured': ''
+};
+
 function show(id) {
   document.querySelectorAll('div[id]').forEach(d => d.style.display = 'none');
   document.getElementById(id).style.display = 'block';
+  document.getElementById('header-suffix').textContent = suffixes[id] !== undefined ? suffixes[id] : '';
 }
 </script>
 
