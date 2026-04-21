@@ -12,6 +12,13 @@
     iframe { width: 100%; height: auto; aspect-ratio: 16/9; }
     table { width: 100%; }
     td img { width: 100%; height: auto; }
+    .video-wrap { position: relative; display: inline-block; width: 100%; }
+    .video-wrap::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+    }
+    .video-wrap.active::after { display: none; }
   }
 </style>
 </head>
@@ -806,6 +813,16 @@ function show(id) {
   document.querySelectorAll('div[id]').forEach(d => d.style.display = 'none');
   document.getElementById(id).style.display = 'block';
   document.getElementById('header-suffix').textContent = suffixes[id] !== undefined ? suffixes[id] : '';
+}
+
+if (window.matchMedia('(max-width: 520px)').matches) {
+  document.querySelectorAll('iframe').forEach(function(iframe) {
+    var wrap = document.createElement('div');
+    wrap.className = 'video-wrap';
+    iframe.parentNode.insertBefore(wrap, iframe);
+    wrap.appendChild(iframe);
+    wrap.addEventListener('click', function() { wrap.classList.add('active'); });
+  });
 }
 </script>
 
