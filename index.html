@@ -832,6 +832,24 @@ if (window.matchMedia('(max-width: 520px)').matches) {
     wrap.appendChild(iframe);
     wrap.addEventListener('click', function() { wrap.classList.add('active'); });
   });
+
+  document.querySelectorAll('table').forEach(function(table) {
+    var tds = table.querySelectorAll('td');
+    if (tds.length < 2) return;
+    var img = tds[0].querySelector('img');
+    if (!img) return;
+    var div = document.createElement('div');
+    var imgEl = img.cloneNode(true);
+    imgEl.removeAttribute('width');
+    imgEl.removeAttribute('height');
+    imgEl.style.cssText = 'width:100%;height:auto;display:block;';
+    div.appendChild(imgEl);
+    var textDiv = document.createElement('div');
+    textDiv.innerHTML = tds[1].innerHTML;
+    textDiv.setAttribute('style', tds[1].getAttribute('style') || '');
+    div.appendChild(textDiv);
+    table.parentNode.replaceChild(div, table);
+  });
 }
 </script>
 
