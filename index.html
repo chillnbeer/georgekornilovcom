@@ -78,10 +78,10 @@
   iframe { width: 500px; display: block; }
   table { width: 500px; }
   td img { width: 281px; height: 281px; }
-  .writer-item { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 40px; max-width: 1024px; }
+  .writer-item { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 40px; max-width: 1200px; }
   .writer-item iframe { flex: 0 0 auto; }
-  .writer-desc { flex: 1 1 440px; min-width: 0; line-height: 1.5; }
-  .writer-desc p { margin: 0 0 16px; }
+  .writer-desc { flex: 1 1 0; min-width: 0; line-height: 1.45; font-size: 15px; }
+  .writer-desc p { margin: 0 0 12px; }
   .writer-desc p:last-child { margin-bottom: 0; }
   @media (max-width: 520px) {
     table { width: 100%; }
@@ -1222,7 +1222,33 @@ function show(id) {
     iframe.src = iframe.getAttribute('data-src');
     iframe.removeAttribute('data-src');
   });
+  if (id === 'writer') requestAnimationFrame(fitWriterDesc);
 }
+
+// Rule: a writer description is never taller than its video.
+// Shrink each description's font-size until it fits the video height.
+function fitWriterDesc() {
+  if (window.matchMedia('(max-width: 520px)').matches) return;
+  document.querySelectorAll('#writer .writer-item').forEach(function(item) {
+    var media = item.querySelector('iframe') || item.querySelector('.video-wrap');
+    var desc = item.querySelector('.writer-desc');
+    if (!media || !desc) return;
+    var target = media.offsetHeight;
+    if (!target) return;
+    var size = 15;
+    desc.style.fontSize = size + 'px';
+    while (desc.scrollHeight > target && size > 8) {
+      size -= 0.5;
+      desc.style.fontSize = size + 'px';
+    }
+  });
+}
+
+var _writerResizeTimer;
+window.addEventListener('resize', function() {
+  clearTimeout(_writerResizeTimer);
+  _writerResizeTimer = setTimeout(fitWriterDesc, 150);
+});
 
 if (window.matchMedia('(max-width: 520px)').matches) {
   document.querySelectorAll('iframe').forEach(function(iframe) {
