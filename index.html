@@ -117,7 +117,7 @@
 </div>
 
 <div style="line-height:1.6; max-width:500px; margin-bottom:24px;">
-  hi there, i’m <a href="/" style="color:inherit; text-decoration:none;">george kornilov</a>. i’m a <a href="#" onclick="show('writer');return false;">writer</a>, <a href="#" onclick="show('composer');return false;">composer</a>, and <a href="#" onclick="show('buzhba');return false;">buzhba</a>
+  hi there, i’m <a href="/" style="color:inherit; text-decoration:none;">george kornilov</a>. i’m a <a href="#" onclick="show('creative');return false;">creative</a>, <a href="#" onclick="show('composer');return false;">composer</a>, and <a href="#" onclick="show('buzhba');return false;">buzhba</a>
 </div>
 
 <div style="line-height:1.6; max-width:500px; margin-bottom:24px;">@buzhba100</div>
@@ -298,7 +298,7 @@
 
 </div>
 
-<div id="writer" style="display:none">
+<div id="creative" style="display:none">
 
 <!-- клавакока -->
 <div class="writer-item">
@@ -1149,7 +1149,7 @@
 
 </div>
 
-<div style="line-height:1.6; max-width:500px; margin:32px 0 12px;">update 21 apr 2026</div>
+<div style="line-height:1.6; max-width:500px; margin:32px 0 12px;">update 4 aug 2026</div>
 
 <script>
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -1183,14 +1183,14 @@ function show(id) {
     iframe.src = iframe.getAttribute('data-src');
     iframe.removeAttribute('data-src');
   });
-  if (id === 'writer') requestAnimationFrame(fitWriterDesc);
+  if (id === 'creative') requestAnimationFrame(fitWriterDesc);
 }
 
 // Rule: a writer description is never taller than its video.
 // Shrink each description's font-size until it fits the video height.
 function fitWriterDesc() {
   if (window.matchMedia('(max-width: 520px)').matches) return;
-  document.querySelectorAll('#writer .writer-item').forEach(function(item) {
+  document.querySelectorAll('#creative .writer-item').forEach(function(item) {
     var media = item.querySelector('iframe') || item.querySelector('.video-wrap');
     var desc = item.querySelector('.writer-desc');
     if (!media || !desc) return;
